@@ -1,0 +1,40 @@
+### Create a poll
+POST http://localhost:3333/polls
+Content-Type: application/json
+
+{
+  "title": "My fst poll!"
+}
+
+### Testing the options in the poll
+POST http://localhost:3333/polls
+Content-Type: application/json
+
+{
+  "title": "What's your favorite programming language?",
+  "options": ["JavaScript/TypeScript", "Java", "Python", "Rust", "Go"]
+}
+
+### get a single poll by id
+GET http://localhost:3333/polls/184351b7-053c-438d-a7e7-abeed4252273
+
+### Finally, lets vote
+POST http://localhost:3333/polls/1537f691-1b63-49bc-8566-a44bf30ea798/votes
+Content-Type: application/json
+
+{
+  "pollOptionId": "8d80f83a-26fe-43f2-b7cf-dec1f1b999e2"
+}
+
+### Finally, lets see our WS server working :). To do this, we must open two tabs in the browser. One to vote (POST) and another to track votes (GET). In the latter will be our route with WS
+
+### HTTP
+POST http://localhost:3333/polls/184351b7-053c-438d-a7e7-abeed4252273/votes
+Content-Type: application/json
+
+{
+  "pollOptionId": "6442d26f-76ea-437c-9fe8-883bb33102a3"
+}
+
+### WS (Use: https://hoppscotch.io/ to try it or another http client that supports web sockets)
+GET ws://localhost:3333/polls/184351b7-053c-438d-a7e7-abeed4252273/results
